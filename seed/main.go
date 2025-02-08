@@ -23,10 +23,10 @@ func main() {
 
 	insertSeedData(db)
 
-	fmt.Println("Seed data inserted successfully.")
 }
 
 func insertSeedData(db *gorm.DB) {
+	// Seed data for users
 	userQuery := `
 		INSERT INTO users (user_id, first_name, last_name, phone_number, address, pin, balance, created_date)
 		VALUES 
@@ -34,22 +34,22 @@ func insertSeedData(db *gorm.DB) {
 			('bd2d723e-c0fa-4c10-88f0-eef45e293353', 'Alice', 'Johnson', '08129876543', 'Jl. Merdeka No. 10', '5678', 30000.00, NOW());
 	`
 
-	err := db.Exec(userQuery)
-	if err != nil {
-		log.Fatalf("Failed to insert users seed data: %v", err)
+	result := db.Exec(userQuery)
+	if result.Error != nil {
+		log.Fatalf("Failed to insert users seed data: %v", result.Error)
 	}
 
 	// Seed data for topups
 	topUpQuery := `
-		INSERT INTO topups (top_up_id, user_id, amount, balance_before, balance_after, created_date)
+		INSERT INTO top_ups (top_up_id, user_id, amount, balance_before, balance_after, created_date)
 		VALUES 
 			('201ddde1-f797-484b-b1a0-07d1190e790a', 'bc1c823e-b0fb-4b20-88c0-dff25e283252', 500000.00, 0.00, 500000.00, NOW()),
 			('302ddde1-f897-485b-b1b0-07d1290e890a', 'bd2d723e-c0fa-4c10-88f0-eef45e293353', 300000.00, 0.00, 300000.00, NOW());
 	`
 
-	err = db.Exec(topUpQuery)
-	if err != nil {
-		log.Fatalf("Failed to insert topups seed data: %v", err)
+	result = db.Exec(topUpQuery)
+	if result.Error != nil {
+		log.Fatalf("Failed to insert topups seed data: %v", result.Error)
 	}
 
 	// Seed data for transactions
@@ -60,8 +60,10 @@ func insertSeedData(db *gorm.DB) {
 			('b8d49df7-55c7-52ed-b4e8-8c27de5432d6', 'bd2d723e-c0fa-4c10-88f0-eef45e293353', '302ddde1-f897-485b-b1b0-07d1290e890a', 'CREDIT', 300000.00, 0.00, 300000.00, 'Initial Top Up', NOW());
 	`
 
-	err = db.Exec(transactionQuery)
-	if err != nil {
-		log.Fatalf("Failed to insert transactions seed data: %v", err)
+	result = db.Exec(transactionQuery)
+	if result.Error != nil {
+		log.Fatalf("Failed to insert transactions seed data: %v", result.Error)
 	}
+
+	fmt.Println("Seed data inserted successfully.")
 }
