@@ -9,7 +9,7 @@ env:
   db:
     DB_HOST: "localhost"
     DB_PORT: "5432"
-    DB_USER: "pohon"
+    DB_USER: "postgres"
     DB_NAME: "changeme"
     DB_PASSWORD: "changeme"
     DB_SCHEMA: "changeme"
