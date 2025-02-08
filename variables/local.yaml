@@ -1,0 +1,15 @@
+env:
+  TZ: "Asia/Jakarta"
+  ENV: "dev"
+  server:
+    SERVER_PORT: "7777"
+    SERVER_NAME: "mnc-rest-api"
+  log:
+    LOG_DIRECTORY: "var/log/filebeat"
+  db:
+    DB_HOST: "localhost"
+    DB_PORT: "5432"
+    DB_USER: "pohon"
+    DB_NAME: "changeme"
+    DB_PASSWORD: "changeme"
+    DB_SCHEMA: "changeme"
